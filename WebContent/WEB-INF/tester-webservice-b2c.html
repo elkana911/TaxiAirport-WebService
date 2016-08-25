@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script language="javascript" type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="jquery-ui.js"></script>
+</head>
+<body>
+Hello World !
+<br>Origin: <input id="origin" value="CGK" ></input>
+<br>Destination: <input id="dest" value="SUB"></input>
+<br>Depart Date:<input id="departDate" value="24/10/2015"></input>
+<p>
+<button id="btnSubmit">Submit</button>
+
+<p>
+<div id="result"></div>
+
+</body>
+<script type="text/javascript">
+
+
+	$(window).load(function () {
+		  // run code
+		  var d = addDays(new Date(), 1);
+		  var dateString = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+		  
+		  $("#departDate").datepicker({
+			    dateFormat: "dd/mm/yy",
+			    showOn: "button",
+			    showButtonPanel: true,
+		  });
+		  $("#departDate").val(dateString);
+		  
+		  
+	});
+
+	function addDays(theDate, days) {
+	    return new Date(theDate.getTime() + days*24*60*60*1000);
+	}
+	
+	$("#btnSubmit").click(function(event){
+		$.ajax({           
+            type : "GET",
+                     url : 'http://localhost:8090/flight/b2c/scrap/schedule.json?airlineCode=JT&ori=' + $('#origin').val() + '&dest=' + $('#dest').val() + '&dateDepart=24/10/2015&adt=1&chd=0&inf=0',
+//                     url : 'http://localhost:8090/flight/scrap/schedule.json?airlineCode=JT&ori=' + $('#origin') CGK&dest=BTH&dateDepart=24/10/2015&adt=1&chd=0&inf=0',
+                     dataType : "text",
+                     contentType: "application/json; charset=utf-8",
+            data:{
+                           username : 'admin',
+                           password : 'admin'
+                          },
+            success : function(response){
+            	$("#result").text(response);
+   						//alert('suckess');                     
+//                         var json = $.parseJSON(response);
+ ///                        for(i = 0; i<=response.length; ++i){
+ //                        $('#date'+i).text(json.data[i].rate);
+                
+ //                        }
+ 					//	window.document.writeln(response);
+                     },
+                     error : function processError(response){
+                     	alert("Err!");
+                     	$("#result").text(response.responseText);
+                     	//window.document.writeln(response.responseText);
+                     }
+                     });
+
+	});
+	
+	function splash(){
+		//$('#loader').show();
+	}
+</script>
+
+</html>

@@ -1,0 +1,8 @@
+searchFlights:
+
+
+getFlights:
+select this_.flightdetid as flightde1_2_0_, this_.admin_bisnis as admin2_2_0_, this_.airline as airline2_0_, this_.arr_time as arr4_2_0_, this_.arrival as arrival2_0_, this_.basic_bisnis as basic6_2_0_, this_.basic_rate as basic7_2_0_, this_.basic_rate_eco as basic8_2_0_, this_.biaya_admin as biaya9_2_0_, this_.biaya_admin_eco as biaya10_2_0_, this_.bisnis_rate as bisnis11_2_0_, this_.currency as currency2_0_, this_.dep_time as dep13_2_0_, this_.departure as departure2_0_, this_.destination as destina15_2_0_, this_.economi_rate as economi16_2_0_, this_.flightnum as flightnum2_0_, this_.fuel_serv_bis as fuel18_2_0_, this_.fuel_serv_eco as fuel19_2_0_, this_.fuel_serv_promo as fuel20_2_0_, this_.ins_serv_bis as ins21_2_0_, this_.ins_serv_fee_eco as ins22_2_0_, this_.ins_serv_fee_promo as ins23_2_0_, this_.isTransit as isTransit2_0_, this_.iwjr as iwjr2_0_, this_.lastUpdate as lastUpdate2_0_, this_.origin as origin2_0_, this_.pajak as pajak2_0_, this_.pajak_bisnis as pajak29_2_0_, this_.pajak_eco as pajak30_2_0_, this_.promo_rate as promo31_2_0_, this_.surcharge_bisnis as surcharge32_2_0_, this_.surcharge_fee as surcharge33_2_0_, this_.surcharge_fee_eco as surcharge34_2_0_, this_.tambahan as tambahan2_0_, this_.tambahan_bisnis as tambahan36_2_0_, this_.tambahan_eco as tambahan37_2_0_, this_.transitId as transitId2_0_ from flightdetails this_ where lower(this_.destination) like ? and this_.isTransit in (?, ?) and TRUNC(DEP_TIME)=TO_DATE(?,'DD/MM/YYYY')
+
+select AIRPORT_NAME,CITY from MST_AIRPORTS WHERE 1=1 AND UPPER(IATA)=UPPER(?)
+

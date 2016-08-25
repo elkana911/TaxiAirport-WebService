@@ -1,0 +1,31 @@
+   
+17 mar 2016   
+**********************************************************************************************
+   PROCEDURE get_queue_info (queueinfo         OUT types.ref_cursor,
+                             p_curr_queue_no   OUT NUMBER,
+                             p_driver_id       IN     VARCHAR2)
+   AS
+      v_curr_queue_no   number;
+   BEGIN
+      OPEN queueinfo FOR
+         SELECT   *
+           FROM   d_queue
+          WHERE   driver_id = p_driver_id;
+
+      SELECT   MIN (queue_no) INTO v_curr_queue_no FROM d_queue;
+
+
+      p_curr_queue_no := v_curr_queue_no;
+   EXCEPTION
+      WHEN NO_DATA_FOUND
+      THEN
+         NULL;
+      WHEN OTHERS
+      THEN
+         raise_application_error (-20006, SQLERRM);
+   END get_queue_info;
+**********************************************************************************************
+   
+   
+**********************************************************************************************
+   
